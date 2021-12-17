@@ -15,6 +15,16 @@ fun Application.module(testing: Boolean = false) {
         get("/") {
             call.respondText("HELLO WORLD!", contentType = ContentType.Text.Plain)
         }
+
+        var weather = "sunny"
+        get("/weatherforecast") {
+            call.respondText(text = weather, contentType = ContentType.Text.Plain)
+        }
+
+        post("weatherforecast") {
+            weather = call.receiveText()
+            call.respondText("The weather has been set to: $weather", contentType = ContentType.Text.Plain)
+        }
     }
 }
 
